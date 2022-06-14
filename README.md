@@ -6,8 +6,10 @@ This repository aims to provide a quick start guide to the installation, running
 
 # 2. Pre-start notes:
   - Nextstrain is compatible with macOS, windows, WSL on windows, Ubuntu Linux and docker. 
+  - Nextstrain runs on you own local environment, your data will not be published. (Unless its on GISAID of course :) ) 
   - The installation steps here will be for ***Ubuntu linux Native environment*** , if you use macOS you will find a file named macOS_installation_code.txt attached. Or if you use other OS system, you will find a link in the references section. 
-  - In this quick guid we will take the ***SARS-CoV2 (ncov)**** workflow as an example. However, Nextstrain provide workflows for multiple pathogens. 
+  - In this quick guid we will take the ***SARS-CoV2 (ncov)**** workflow as an example. However, Nextstrain provide workflows for multiple pathogens.
+  - The guide for preparing data mentioned here is for your local data.  
 
 # 3. Installation: 
 
@@ -68,14 +70,46 @@ This repository aims to provide a quick start guide to the installation, running
    - nextstrain_profiles 
    - scripts 
 
-# 6. 
+# 6. Run the test data:
+  #PATH: here insert your path 
+  ```
+  $ cd #PATH/nextstrain/ncov 
+  
+  $ nextstrain build . --cores all --configfile ncov-tutorial/example-data.yaml
 
+  ``` 
 
+# 7. Visualize the results: 
+  ```
+  $ nextstrain view auspice/
+  
+  ```
 
+# 8. Now to prepare your own data:
+  - you have more than one option:
+    1. You want to analyze your own data only 
+    2. you want to analyze your data with globally published data (GISAID or NCBI) 
+    3. you want to analyze globally publised data only
+  - The files you need to prepare:
+    1. genome sequences metadata (runName.metadata.tsv)
+    2. genome sequences .fasta file (runName.sequences.fasta)
+    3. configration file for the workflow that says how to use those data. (config.yml)
+    4. build.yml file to locate the path of the data and other informations 
+    5. we need to provide references sequences which is really important for reading the phylogenetic time tree. This reference sequence must be included in the (runName.sequences.fasta) and its data in (runName.metadata.tsv)
+    6. 
+ 
+
+# 9. Running workflow:
+
+# 10. Data visulization:
+
+# 11. Errors and their solutions: 
 
 
 # .Tips and tricks: 
 
 # .References:
   1. [nextstrain/ncov](https://github.com/nextstrain/ncov)
-  2. 
+  2. [changes logs](https://docs.nextstrain.org/projects/ncov/en/latest/reference/change_log.html)
+  3. [A Getting Started Guide to the Genomic Epidemiology of SARS-CoV-2](https://docs.nextstrain.org/projects/ncov/en/latest/) 
+  4. 
