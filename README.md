@@ -15,7 +15,7 @@ This repository aims to provide a quick start guide to the installation, running
 # 3. Installation: 
 
   ### 3.1 Install miniconda or Anaconda. (If you already have it skip this point)
-   - If you want to choose between Anaconda and mini conda, This [link](https://www.educative.io/answers/anaconda-vs-miniconda) might help
+   - If you want to choose between Anaconda and miniconda, This [link](https://www.educative.io/answers/anaconda-vs-miniconda) might help
    - [Anaconda installation guide](https://docs.anaconda.com/anaconda/install/)
    - [Miniconda Installation guide](https://docs.conda.io/en/latest/miniconda.html) 
 
