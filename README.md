@@ -79,14 +79,13 @@ This repository aims to provide a quick start guide to the installation, running
   $ nextstrain build . --cores all --configfile ncov-tutorial/example-data.yaml
 
   ``` 
-
-# 7. Visualize the results: 
+  Visualize test data results: 
   ```
   $ nextstrain view auspice/
   
   ```
 
-# 8. Now to prepare your own data:
+# 7. Now to prepare your own data:
   - you have more than one option:
     1. You want to analyze your own data only 
     2. you want to analyze your data with globally published data (GISAID or NCBI) 
@@ -100,13 +99,13 @@ This repository aims to provide a quick start guide to the installation, running
     6. 
  
 
-# 9. Running workflow:
+# 8. Running workflow:
   TBD
 
-# 10. Data visulization:
+# 9. Data visulization:
   TBD
 
-# 11. Errors and their solutions: 
+# 10. Errors and their solutions: 
   TBD
 
 
