@@ -2,6 +2,7 @@
 This repository aims to provide a quick start guide to the installation, running, troubleshooting and tips of the Nextstrain workflow (https://nextstrain.org)
 
 # 1. Introduction:
+  TBD
 
 
 # 2. Pre-start notes:
@@ -100,13 +101,17 @@ This repository aims to provide a quick start guide to the installation, running
  
 
 # 9. Running workflow:
+  TBD
 
 # 10. Data visulization:
+  TBD
 
 # 11. Errors and their solutions: 
+  TBD
 
 
 # .Tips and tricks: 
+  TBD
 
 # .References:
   1. [nextstrain/ncov](https://github.com/nextstrain/ncov)
