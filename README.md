@@ -75,7 +75,7 @@ This repository aims to provide a quick start guide to the installation, running
   #PATH: here insert your path 
   ```
   $ cd #PATH/nextstrain/ncov 
-  
+  $ conda activate nexxtstrain
   $ nextstrain build . --cores all --configfile ncov-tutorial/example-data.yaml
 
   ``` 
