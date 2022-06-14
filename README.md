@@ -7,7 +7,7 @@ This repository aims to provide a quick start guide to the installation, running
 
 # 2. Pre-start notes:
   - Nextstrain is compatible with macOS, windows, WSL on windows, Ubuntu Linux and docker. 
-  - Nextstrain runs on your own local environment, your data will not be published. (Unless its on GISAID of course :) ) 
+  - Nextstrain runs on your own local environment, your data will not be published. (Unless its on GISAID, of course :) ) 
   - The installation steps here will be for ***Ubuntu linux Native environment*** , if you use macOS you will find a file named macOS_installation_code.txt attached. Or if you use other OS system, you will find a link in the references section. 
   - In this quick guid we will take the ***SARS-CoV2 (ncov)**** workflow as an example. However, Nextstrain provide workflows for multiple pathogens.
   - The guide for preparing data mentioned here is for your local data.  
