@@ -4,7 +4,7 @@ This repository aims to provide a quick start guide to the installation, running
 Example of Nextstrain output:
 
 [![Screen-Shot-2022-06-17-at-9-19-48-PM.png](https://i.postimg.cc/QNpfhBXY/Screen-Shot-2022-06-17-at-9-19-48-PM.png)](https://postimg.cc/kDgQygRW)
-
+[![Screen-Shot-2022-06-17-at-10-46-18-PM.png](https://i.postimg.cc/sxTyM3FM/Screen-Shot-2022-06-17-at-10-46-18-PM.png)](https://postimg.cc/cttPjyLW)
 
 # 1. Pre-start notes:
   - Nextstrain is compatible with macOS, windows, WSL on windows, Ubuntu Linux and docker. 
