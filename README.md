@@ -3,62 +3,59 @@ This repository aims to provide a quick start guide to the installation, running
 
 Example of Nextstrain output:
 
-![This is an image](https://drive.google.com/file/d/1UyhDExurn4d4iEM9Sjvbag2TmmIOfLV3/view?usp=sharing)
-
-# 1. Introduction:
-  TBD
+[![Screen-Shot-2022-06-17-at-9-19-48-PM.png](https://i.postimg.cc/QNpfhBXY/Screen-Shot-2022-06-17-at-9-19-48-PM.png)](https://postimg.cc/kDgQygRW)
 
 
-# 2. Pre-start notes:
+# 1. Pre-start notes:
   - Nextstrain is compatible with macOS, windows, WSL on windows, Ubuntu Linux and docker. 
   - Nextstrain runs on your own local environment, your data will not be published. (Unless its on GISAID, of course :smile: ) 
   - The installation steps here will be for ***Ubuntu linux Native environment*** , if you use macOS you will find a file named macOS_installation_code.txt attached. Or if you use other OS system, you will find a link in the references section. 
   - In this quick guid we will take the ***SARS-CoV2 (ncov)**** workflow as an example. However, Nextstrain provide workflows for multiple pathogens.
   - The guide for preparing data mentioned here is for your local data.  
 
-# 3. Installation: 
+# 2. Installation: 
 
-  ### 3.1 Install miniconda or Anaconda. (If you already have it skip this point)
+  ### Install miniconda or Anaconda. (If you already have it skip this point)
    - If you want to choose between Anaconda and miniconda, This [link](https://www.educative.io/answers/anaconda-vs-miniconda) might help
    - [Anaconda installation guide](https://docs.anaconda.com/anaconda/install/)
    - [Miniconda Installation guide](https://docs.conda.io/en/latest/miniconda.html) 
 
-  ### 3.2 Install memba tool on the base conda environment:
-  ```
-  $ conda install -n base -c conda-forge mamba --yes
+  ### Install memba tool on the base conda environment:
+```
+$ conda install -n base -c conda-forge mamba --yes
   
-  $ conda activate base
-  ```
-  ### 3.3 Install nextstrain components: 
+$ conda activate base
+```
+  ### Install nextstrain components: 
    - Create a conda environment named nextstrain and install all the necessary software using mamba:
-     ```       
-     $ mamba create -n nextstrain -c conda-forge -c bioconda nextstrain-cli augur auspice nextalign snakemake git --yes
-     ```
+```     
+$ mamba create -n nextstrain -c conda-forge -c bioconda nextstrain-cli augur auspice nextalign snakemake git --yes
+```
    - Activate the conda environment:
-     ```
-     $ conda activate mextstrain 
-     ```     
+```
+$ conda activate mextstrain 
+```  
    - Confirm that the installation worked.
-     ```
-     $ nextstrain check-setup --set-default 
-     ``` 
+```
+$ nextstrain check-setup --set-default 
+```
    - The final output from the last command should look like this ```Setting default environment to <option>. ``` , where `<option>` is the option chosen in the previous step.
 
-# 4. Installing pathogen specific workflow:
+# 3. Installing pathogen specific workflow:
    Here you will find the list of pathogens that has a workflow in Nextstrain. https://nextstrain.org/pathogens 
    - If using the native runtime, install these additional packages necessary to run the ncovworkflow. Make sure to activate the correct conda environment.
-      ```
-        $ conda activate nextstrain     
-        $ mamba install -c conda-forge -c bioconda epiweeks nextclade nextalign pangolin pangolearn 
-      ```
-      Sometimes using `conda` instead of `mamba` works !  
+```
+$ conda activate nextstrain     
+$ mamba install -c conda-forge -c bioconda epiweeks nextclade nextalign pangolin pangolearn 
+```
+   Sometimes using `conda` instead of `mamba` works !  
    
    - Download the ncov workflow:
         - Use `Git` to download a copy of the ncov repository containing the workflow and the testing data.
-        ```
-            $ git clone https://github.com/nextstrain/ncov.git 
-        ```
-# 5. After installation make sure that you have the following directories/files in your `#PATH/nextstrain/ncov` directory:
+```
+$ git clone https://github.com/nextstrain/ncov.git 
+```
+# 4. After installation make sure that you have the following directories/files in your `#PATH/nextstrain/ncov` directory:
    - snakefile; nextstrain use snakemake as their workflow managment software 
    - data; location of the final input data
    - default; this contain all the defalt parameters for the workflow. Also, this directory contains two files you might need which are:
@@ -75,53 +72,53 @@ Example of Nextstrain output:
    - nextstrain_profiles 
    - scripts 
 
-# 6. Run the test data:
+# 5. Run the test data:
   #PATH: here insert your path 
-  ```
-  $ cd #PATH/nextstrain/ncov 
-  $ conda activate nextstrain
-  $ nextstrain build . --cores all --configfile ncov-tutorial/example-data.yaml
+```
+$ cd #PATH/nextstrain/ncov 
+$ conda activate nextstrain
+$ nextstrain build . --cores all --configfile ncov-tutorial/example-data.yaml
 
-  ``` 
+```
   Visualize test data results: 
-  ```
-  $ nextstrain view auspice/
+```
+$ nextstrain view auspice/
   
-  ```
+```
 
-# 7. Now to prepare your own data:
+# 6. Now to prepare your own data:
   ## General Instructions:
    - you have more than one option:
       1. You want to analyze your own local data only 
       2. you want to analyze your data with [globally published data (GISAID)](https://docs.nextstrain.org/projects/ncov/en/latest/guides/data-prep/gisaid-search.html)
       3. you want to analyze globally publised data only [full GISAID database](https://docs.nextstrain.org/projects/ncov/en/latest/guides/data-prep/gisaid-full.html)
   
-  ## before running any new run, go the the following directories (logs, auspec, and results) and move any previous outputs to a new directory (previous_runName) so the results won't overlap
+  - before running any new run, go the the following directories (logs, auspec, and results) and move any previous outputs to a new directory (previous_runName) so the results won't overlap
    - go to /ncov/my_profiles and create a directory for the run 
 ```
-          $ mkdir runName
-          $ cd runName
+$ mkdir runName
+$ cd runName
 ``` 
    - copy the following files to your runName directory
 ```
-        $ cp ../example/builds.yaml ../example/config.yaml ../example/my_description.md . && touch colors.tsv 
+$ cp ../example/builds.yaml ../example/config.yaml ../example/my_description.md . && touch colors.tsv 
 ``` 
 
   ## prepare runName.sequences.fasta
    - choose the sequences data you want to include
    - collect all the sequences into one fasta
 ```        
-            $ cat *.new.fa > all.fasta 
-            $ for i in `ls all.fasta`;do sed  -i 's/"//' $i;done
+$ cat *.new.fa > all.fasta 
+$ for i in `ls all.fasta`;do sed  -i 's/"//' $i;done
 ``` 
    - add the reference sequence to the all.fasta (Wuhan/Hu-1/2019)
    - capitalize all the letters:
 ```   
-            $ awk 'BEGIN{FS=" "}{if(!/>/){print toupper($0)}else{print $1}}' sequences.fasta > output.fasta
+$ awk 'BEGIN{FS=" "}{if(!/>/){print toupper($0)}else{print $1}}' sequences.fasta > output.fasta
 ```
    - make the sequences one line
 ```    
-            $ awk '{if(NR==1) {print $0} else {if($0 ~ /^>/) {print "\n"$0} else {printf $0}}}' sequences.fasta > output.fasta
+$ awk '{if(NR==1) {print $0} else {if($0 ~ /^>/) {print "\n"$0} else {printf $0}}}' sequences.fasta > output.fasta
 ```  
    - make sure that the sequences header strings `>` dose not contain any `()[]{}|#><` charecters.
 
@@ -137,20 +134,21 @@ Example of Nextstrain output:
         - date format must be as: YYYY-MM-DD 
     
   ## prepare the builds and config files:
-  prepare the builds and config files based on what you want to do in this run. for example the basic things you need to run the pipeline is the following, if you want to do other things, you will find a reference in the reference section that might help.
+  prepare the builds and config files based on what you want to do in this run. for example the basic things you need to run the pipeline is the following:
+  if you want to do other things, you will find a reference in the reference section that might help.
  ```       
-        $ vi builds.yaml
+$ vi builds.yaml
           inputs:
-                - name: Saudi_Arabia_N501RGR
+                - name: runName
                         metadata: data/runName.metadata.tsv
                         sequences: data/runName.sequences.fasta
         # the files below is not mandatory, if you have it and want to use just remove the # sign
          #files:
-              #colors: "my_profiles/GA_32RUNS/colors.tsv" 
-              #description: "my_profiles/GA_38RUNS/description.md"
+              #colors: "my_profiles/runName/colors.tsv" 
+              #description: "my_profiles/runName/description.md"
 ```
 ```
-        $ vi config.yaml
+$ vi config.yaml
           configfile:
                         - defaults/parameters.yaml # Pull in the default values
                         - my_profiles/runName/builds.yaml
@@ -176,31 +174,31 @@ Example of Nextstrain output:
       5. we need to provide references sequences which is really important for reading the phylogenetic time tree. This reference sequence must be      included in the (runName.sequences.fasta) and its data in (runName.metadata.tsv)
   - Move the following files: 
 ```
-  $ cp runName.sequences.fasta #PATH/nextstrain/ncov/data
-  $ cp runName.metadata.tsv #PATH/nextstrain/ncov/data 
+$ cp runName.sequences.fasta #PATH/nextstrain/ncov/data
+$ cp runName.metadata.tsv #PATH/nextstrain/ncov/data 
   
 ```  
  
-# 8. Running workflow:
+# 7. Running workflow:
 ```
-  (base) $ conda activate nextstrain 
-  (nextstrain) $ snakemake --profile my_profiles/runName/ -p 
+(base) $ conda activate nextstrain 
+(nextstrain) $ snakemake --profile my_profiles/runName/ -p 
 ``` 
 
-# 9. Data visulization:
+# 8. Data visulization:
   - when your run is finished, and no error massages appeared. go to the `#PATH/nextstrain/ncov/auspice`
   - open this link https://auspice.us/ 
   - drag the runName.json file and drop it in the https://auspice.us/ to visualize your data. (you can find the example data attached) 
 
-# 10. Nextstrain community:
+# 9. Nextstrain community:
   Nextstrain have created a website hub [(Nextstrain discussion)](https://discussion.nextstrain.org/) that you can visit to seek help with anything that you might face, or to just have an insight. They have been of great help 
   
 
-# 11. Check for nextstrain updates: 
+# 10. Check for nextstrain updates: 
     https://docs.nextstrain.org/projects/cli/en/stable/commands/update/ 
     
     
-# 12.References:
+# 11.References:
   1. [nextstrain/ncov](https://github.com/nextstrain/ncov)
   2. [changes logs](https://docs.nextstrain.org/projects/ncov/en/latest/reference/change_log.html)
   3. [A Getting Started Guide to the Genomic Epidemiology of SARS-CoV-2](https://docs.nextstrain.org/projects/ncov/en/latest/) 
@@ -210,8 +208,8 @@ Example of Nextstrain output:
   7. [Data Sharing via GitHub](https://nextstrain.org/community/)
   8. [Nextstrain CLI](https://docs.nextstrain.org/projects/cli/en/stable/) 
 
-# 13. errors and solutions:
-  Here we share some of the error faced and how to solve them (emoji) 
+# 12. errors and solutions:
+  Here we share some of the error faced and how to solve them :nerd_face: :ok_hand: 
   - error:
 ```
     Error in rule calculate_epiweeks:
@@ -330,15 +328,15 @@ Example of Nextstrain output:
 ```
 Error in rule filter:
             jobid: 9
-            output: results/filtered_Saudi_Arabia_N501RGR.fasta.xz
-            log: logs/filtered_Saudi_Arabia_N501RGR.txt (check log file(s) for error message)
+            output: results/filtered_nnn.fasta.xz
+            log: logs/filtered_nnn.txt (check log file(s) for error message)
             shell:
 
-                augur filter             --sequences results/masked_Saudi_Arabia_N501RGR.fasta.xz             --metadata results/sanitized_metadata_Saudi_Arabia_N501RGR.tsv.xz             --include defaults/include.txt             --max-date 2021-11-08             --min-date 2019.74             --exclude-ambiguous-dates-by any             --exclude defaults/exclude.txt results/to-exclude_Saudi_Arabia_N501RGR.txt             --exclude-where division='USA'            --min-length 27000             --output results/filtered_Saudi_Arabia_N501RGR.fasta 2>&1 | tee logs/filtered_Saudi_Arabia_N501RGR.txt;
-                xz -2 results/filtered_Saudi_Arabia_N501RGR.fasta
+                augur filter             --sequences results/masked_nnn.fasta.xz             --metadata results/sanitized_metadata_nnn.tsv.xz             --include defaults/include.txt             --max-date 2021-11-08             --min-date 2019.74             --exclude-ambiguous-dates-by any             --exclude defaults/exclude.txt results/to-exclude_nnn.txt             --exclude-where division='USA'            --min-length 27000             --output results/filtered_nnn.fasta 2>&1 | tee logs/filtered_nnn.txt;
+                xz -2 results/filtered_nnn.fasta
 
                 (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
-            Logfile logs/filtered_Saudi_Arabia_N501RGR.txt:
+            Logfile logs/filtered_nnn.txt:
             Note: You did not provide a sequence index, so Augur will generate one. You can generate your own index ahead of time with `augur index` and pass it with `augur filter --sequence-index`.
             ERROR: All samples have been dropped! Check filter rules and metadata file format.
                     102 strains were dropped during filtering
@@ -354,15 +352,15 @@ Error in rule filter:
 ```
             Error in rule filter:
             jobid: 9
-            output: results/filtered_Saudi_Arabia_N501RGR.fasta.xz
-            log: logs/filtered_Saudi_Arabia_N501RGR.txt (check log file(s) for error message)
+            output: results/filtered_nnn.fasta.xz
+            log: logs/filtered_nnn.txt (check log file(s) for error message)
             shell:
 
-                augur filter             --sequences results/masked_Saudi_Arabia_N501RGR.fasta.xz             --metadata  results/sanitized_metadata_Saudi_Arabia_N501RGR.tsv.xz             --include defaults/include.txt             --max-date 2021-11-08             --min-date 2019.74             --exclude-ambiguous-dates-by any             --exclude defaults/exclude.txt results/to-exclude_Saudi_Arabia_N501RGR.txt             --exclude-where division='USA'            --min-length 27000             --output results/filtered_Saudi_Arabia_N501RGR.fasta 2>&1 | tee logs/filtered_Saudi_Arabia_N501RGR.txt;
-                xz -2 results/filtered_Saudi_Arabia_N501RGR.fasta
+                augur filter             --sequences results/masked_nnn.fasta.xz             --metadata  results/sanitized_metadata_nnn.tsv.xz             --include defaults/include.txt             --max-date 2021-11-08             --min-date 2019.74             --exclude-ambiguous-dates-by any             --exclude defaults/exclude.txt results/to-exclude_nnn.txt             --exclude-where division='USA'            --min-length 27000             --output results/filtered_nnn.fasta 2>&1 | tee logs/filtered_nnn.txt;
+                xz -2 results/filtered_nnn.fasta
 
                 (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
-            Logfile logs/filtered_Saudi_Arabia_N501RGR.txt:
+            Logfile logs/filtered_nnn.txt:
             Note: You did not provide a sequence index, so Augur will generate one. You can generate your own index ahead of time with `augur index` and    pass it with `augur filter --sequence-index`.
             ERROR: All samples have been dropped! Check filter rules and metadata file format.
             51 strains were dropped during filtering
@@ -455,7 +453,7 @@ Error in rule refine:
 
 ```
    - solution:
-      1- there is an error with the alignemnt, check the log: align_Saudi_Arabia_N501RGR. try to change the fasta file from inverted to single line fasta: 
+      1- there is an error with the alignemnt, check the log: align_nnn. try to change the fasta file from inverted to single line fasta: 
                ` $ awk '{if(NR==1) {print $0} else {if($0 ~ /^>/) {print "\n"$0} else {printf $0}}}' interleaved.fasta > singleline.fasta `
       2- Wuhan/Hu-1/2019 not being part of the dataset: 
                 https://githubmemory.com/repo/nextstrain/augur/issues/744
@@ -475,7 +473,7 @@ Error in rule refine:
     - make sure that no tasks running ` $ htop ` 
     - run this code , then run your run 
 ```
-                $ (nextstrain) bioinformatics@nnnn:/mnt/e/Bioinformatics/nextstrain/nextstrain/ncov$ snakemake --profile my_profiles/PHL_GISAID_tracing/012020-122021/ -p --unlock
+                $ (nextstrain) bioinformatics@nnnn:/mnt/e/Bioinformatics/nextstrain/nextstrain/ncov$ snakemake --profile my_profiles/nnn/012020-122021/ -p --unlock
 
 ```
    - error:
@@ -487,14 +485,14 @@ Error in rule refine:
         [Sun Apr  3 12:34:36 2022]
         Error in rule sanitize_metadata:
             jobid: 12
-            output: results/sanitized_metadata_GA_32RUNS.tsv.xz
-            log: logs/sanitize_metadata_GA_32RUNS.txt (check log file(s) for error message)
+            output: results/sanitized_metadata_nnn.tsv.xz
+            log: logs/sanitize_metadata_nnn.txt (check log file(s) for error message)
             shell:
 
-                python3 scripts/sanitize_metadata.py             --metadata data/GA_32RUNS.metadata.tsv             --metadata-id-columns strain name 'Virus name'             --database-id-columns 'Accession ID' gisaid_epi_isl genbank_accession             --parse-location-field Location             --rename-fields 'Virus name=strain' Type=type 'Accession ID=gisaid_epi_isl' 'Collection date=date' 'Additional location information=additional_location_information' 'Sequence length=length' Host=host 'Patient age=patient_age' Gender=sex Clade=GISAID_clade 'Pango lineage=pango_lineage' pangolin_lineage=pango_lineage Lineage=pango_lineage 'Pangolin version=pangolin_version' Variant=variant 'AA Substitutions=aa_substitutions' aaSubstitutions=aa_substitutions 'Submission date=date_submitted' 'Is reference?=is_reference' 'Is complete?=is_complete' 'Is high coverage?=is_high_coverage' 'Is low coverage?=is_low_coverage' N-Content=n_content GC-Content=gc_content             --strip-prefixes hCoV-19/ SARS-CoV-2/                          --output results/sanitized_metadata_GA_32RUNS.tsv.xz 2>&1 | tee logs/sanitize_metadata_GA_32RUNS.txt
+                python3 scripts/sanitize_metadata.py             --metadata data/nnn.metadata.tsv             --metadata-id-columns strain name 'Virus name'             --database-id-columns 'Accession ID' gisaid_epi_isl genbank_accession             --parse-location-field Location             --rename-fields 'Virus name=strain' Type=type 'Accession ID=gisaid_epi_isl' 'Collection date=date' 'Additional location information=additional_location_information' 'Sequence length=length' Host=host 'Patient age=patient_age' Gender=sex Clade=GISAID_clade 'Pango lineage=pango_lineage' pangolin_lineage=pango_lineage Lineage=pango_lineage 'Pangolin version=pangolin_version' Variant=variant 'AA Substitutions=aa_substitutions' aaSubstitutions=aa_substitutions 'Submission date=date_submitted' 'Is reference?=is_reference' 'Is complete?=is_complete' 'Is high coverage?=is_high_coverage' 'Is low coverage?=is_low_coverage' N-Content=n_content GC-Content=gc_content             --strip-prefixes hCoV-19/ SARS-CoV-2/                          --output results/sanitized_metadata_nnn.tsv.xz 2>&1 | tee logs/sanitize_metadata_nnn.txt
 
                 (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
-        Logfile logs/sanitize_metadata_GA_32RUNS.txt:
+        Logfile logs/sanitize_metadata_nnn.txt:
         Traceback (most recent call last):
         File "/mnt/e/Bioinformatics/nextstrain/nextstrain/ncov/scripts/sanitize_metadata.py", line 2, in <module>
             from augur.io import open_file, read_metadata
